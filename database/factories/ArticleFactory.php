@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Article>
@@ -17,10 +18,9 @@ class ArticleFactory extends Factory
     public function definition()
     {
         $title = fake()->sentence;
-        $slug = str_slug($title, '-');
+        $slug = Str::slug($title, '-');
 
         return [
-            'user_id' => fake()->randomElement([1, 5]),
             'slug' => $slug,
             'title' => $title,
             'description' => fake()->sentence(),

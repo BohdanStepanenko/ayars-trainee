@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Article;
+use App\Models\Contact;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class ArticlesSeeder extends Seeder
+class ContactsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,6 +15,6 @@ class ArticlesSeeder extends Seeder
      */
     public function run()
     {
-        Article::factory(10)->create();
+        Contact::factory(5)->create();
     }
 }
