@@ -25,8 +25,18 @@
         </nav>
 
         <main class="py-4">
+			<!-- Alerts -->
             @include('components.alerts')
-            @yield('content')
+
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-md-10">
+            			@yield('content')
+					</div>
+					<!-- Sidebar -->
+					@include('layouts.parts.sidebar')
+				</div>
+			</div>
         </main>
     </div>
 </body>

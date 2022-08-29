@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Article\CreateArticleRequest;
 use App\Http\Requests\Article\UpdateArticleRequest;
 use App\Models\Article;
+use App\Models\Tag;
 
 class ArticleController extends Controller
 {
@@ -24,12 +25,14 @@ class ArticleController extends Controller
 
 	public function create(): \Illuminate\Contracts\View\View
 	{
-		return view('pages.article.create_article');
+		$tags = Tag::all();
+
+		return view('pages.article.create_article', ['tags' => $tags]);
 	}
 
 	public function store(CreateArticleRequest $request): \Illuminate\Http\RedirectResponse
     {
-        Article::create([
+        $article = Article::create([
             'slug' => $request->slug,
             'title' => $request->title,
             'description' => $request->description,
@@ -37,20 +40,24 @@ class ArticleController extends Controller
             'is_published' => $request->has('is_published'),
         ]);
 
+		$article->tags()->sync($request->input('tags'));
+
         return redirect()->back()->with('success', 'Article successful added');
     }
 
 	public function edit(string $slug): \Illuminate\Contracts\View\View
 	{
-		$article = Article::where('slug', $slug)->first();
+		$article = Article::where('slug', $slug)->with('tags')->first();
+		$tags = Tag::all();
 
-		return view('pages.article.edit_article', ['article' => $article]);
+		return view('pages.article.edit_article', ['article' => $article, 'tags' => $tags]);
 	}
 
 	public function update(UpdateArticleRequest $request, int $id): \Illuminate\Http\RedirectResponse
 	{
 		$article = Article::findOrFail($id)->first();
 		$article->update($request->validated());
+		$article->tags()->sync($request->input('tags'));
 
 		return redirect()->back()->with('success', 'Article successful updated');
 	}
@@ -58,6 +65,7 @@ class ArticleController extends Controller
 	public function destroy(int $id): \Illuminate\Http\RedirectResponse
 	{
 		$article = Article::findOrFail($id);
+		$article->tags()->delete();
 		$article->delete();
 
 		return redirect()->route('articles.index')->with('success', 'Article successful deleted');

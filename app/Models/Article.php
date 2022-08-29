@@ -16,4 +16,9 @@ class Article extends Model
 		'full_description',
 		'is_published',
     ];
+
+	public function tags()
+	{
+		return $this->morphToMany(Tag::class, 'taggable');
+	}
 }

@@ -17,7 +17,7 @@ class UpdateArticleRequest extends FormRequest
 		$article_id = Article::where('id', $this->route('article'))->first()->id;
 
         return [
-			'slug' => 'required|regex:/(^[A-Za-z0-9_-]+$)+/|unique:articles,slug' . $article_id,
+			'slug' => 'required|regex:/(^[A-Za-z0-9_-]+$)+/|unique:articles,slug,' . $article_id,
 			'title' => 'required|string|between:5,100',
 			'description' => 'required|string|max:255',
 			'full_description' => 'required|string',
