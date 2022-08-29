@@ -7,17 +7,12 @@ use App\Http\Controllers\ContactController;
 
 Auth::routes();
 
-Route::get('/', [ArticleController::class, 'getAllArticles'])->name('articles');
-Route::view('/about', 'pages.about')->name('about');
+Route::get('/', [ArticleController::class, 'index'])->name('articles.index');
+Route::resource('articles', ArticleController::class)->except('index');
 
-Route::prefix('articles')->group(function () {
-    Route::get('/{slug}', [ArticleController::class, 'getArticle'])->name('article');
-    Route::view('articles/create', 'pages.create_article')->name('add-article');
-    Route::post('articles/create', [ArticleController::class, 'storeArticle'])->name('store-article');
-});
-
-Route::view('/contacts', 'pages.create_contact')->name('contacts');
-Route::post('/contacts',  [ContactController::class, 'storeContact'])->name('store-contact');
-Route::get('/admin/feedback', [ContactController::class, 'getAllFeedbacks'])->name('feedbacks');
+Route::view('/about', 'pages.about')->name('abouts.index');
+Route::view('/contacts', 'pages.contact.create_contact')->name('contacts.create');
+Route::post('/contacts',  [ContactController::class, 'storeContact'])->name('contacts.store');
+Route::get('/admin/feedback', [ContactController::class, 'getAllFeedbacks'])->name('feedbacks.index');
 
 

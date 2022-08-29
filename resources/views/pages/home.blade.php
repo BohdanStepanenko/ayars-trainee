@@ -1,0 +1,17 @@
+@extends('layouts.app')
+@section('tab-title', 'Articles')
+
+@section('content')
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-md-8">
+				<div class="card">
+					<div class="card-header">{{ __('Articles') }}</div>
+					@foreach($articles as $article)
+						@include('components.article_card')
+					@endforeach
+				</div>
+			</div>
+		</div>
+	</div>
+@endsection

@@ -12,7 +12,13 @@
                             Posted: <b>{{ date_format($article->created_at, 'd-m-Y H:m') }}</b>
                         </p>
                         <h5>{{ $article->full_description }}</h5>
-                        <a href="{{ route('articles') }}" class="btn btn-primary">Back to articles</a>
+						<a href="{{ route('articles.index') }}" class="btn btn-primary">Back to articles</a>
+						<a href="{{ route('articles.edit', $article->slug) }}" class="btn btn-warning">Update</a>
+						<form action="{{ route('articles.destroy', $article->id )}}" method="POST">
+							@csrf
+							@method('delete')
+							<button type="submit" class="btn btn-danger">Delete</button>
+						</form>
                     </div>
                 </div>
             </div>

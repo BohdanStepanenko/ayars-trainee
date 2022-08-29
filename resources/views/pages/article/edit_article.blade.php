@@ -1,14 +1,14 @@
 @extends('layouts.app')
-@section('tab-title', 'Contacts')
+@section('tab-title', 'Edit article')
 
 @section('content')
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-md-8">
 				<div class="card">
-					<div class="card-header">{{ __('Contacts') }}</div>
+					<div class="card-header">{{ __('Edit article') }}</div>
 					<div class="card-body">
-						@include('components.forms.create_contact_form')
+						@include('components.forms.article.edit_article_form')
 					</div>
 				</div>
 			</div>

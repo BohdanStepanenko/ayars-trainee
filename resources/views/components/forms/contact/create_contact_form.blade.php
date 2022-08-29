@@ -1,4 +1,4 @@
-<form method="POST" action="{{ route('store-contact') }}">
+<form method="POST" action="{{ route('contacts.store') }}">
 	@csrf
 	<div class="mb-3">
 		<label for="email" class="form-label">Email</label>

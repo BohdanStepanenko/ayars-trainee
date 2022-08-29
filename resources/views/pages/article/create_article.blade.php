@@ -8,7 +8,7 @@
 				<div class="card">
 					<div class="card-header">{{ __('Create article') }}</div>
 					<div class="card-body">
-						@include('components.forms.create_article_form')
+						@include('components.forms.article.create_article_form')
 					</div>
 				</div>
 			</div>
